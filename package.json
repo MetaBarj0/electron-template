@@ -1,0 +1,28 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "description": "electron typescript template project",
+  "main": "./app/main.js",
+  "scripts": {
+    "build": "npx typescript",
+    "lint": "eslint --ext .ts ./app",
+    "format": "prettier ./app/**/*.ts",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ./dist/main.js"
+  },
+  "author": "Sebastien Levy",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^5.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^12.0.3",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.9.0",
+    "@typescript-eslint/typescript-estree": "^1.9.0",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.3.0",
+    "prettier": "^1.17.1",
+    "typescript": "^3.4.5"
+  }
+}
