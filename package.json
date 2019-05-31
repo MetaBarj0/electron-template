@@ -4,7 +4,8 @@
   "description": "electron typescript template project",
   "main": "./app/main.js",
   "scripts": {
-    "build": "npx typescript",
+    "build": "npx tsc",
+    "clean" :"rimraf ./dist",
     "lint": "eslint --ext .ts ./app",
     "format": "prettier --write \"./**/*.ts\"",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -30,6 +31,7 @@
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "prettier": "^1.17.1",
+    "rimraf": "^2.6.3",
     "typescript": "^3.4.5"
   }
 }
