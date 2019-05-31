@@ -6,9 +6,9 @@
   "scripts": {
     "build": "npx typescript",
     "lint": "eslint --ext .ts ./app",
-    "format": "prettier ./app/**/*.ts",
+    "format": "prettier --write \"./**/*.ts\"",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ./dist/main.js"
+    "start": "electron ./dist/app/main.js"
   },
   "author": "Sebastien Levy",
   "license": "ISC",
@@ -16,13 +16,19 @@
     "electron": "^5.0.2"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^0.1.3",
+    "@types/chai": "^4.1.7",
     "@types/electron": "^1.6.10",
+    "@types/mocha": "^5.2.6",
     "@types/node": "^12.0.3",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "@typescript-eslint/typescript-estree": "^1.9.0",
+    "chai": "^4.2.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
     "prettier": "^1.17.1",
     "typescript": "^3.4.5"
   }

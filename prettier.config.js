@@ -1,3 +1,3 @@
 {
-    parser: "typescript"
+  parser: "typescript";
 }
