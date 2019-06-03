@@ -4,17 +4,17 @@
   "description": "electron typescript template project",
   "main": "./app/main.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "npx tsc && cpx \"./src/app/**/*.{html,css}\" ./dist/src/app",
     "clean": "rimraf ./dist",
     "lint": "eslint --ext .ts \"./**/*.ts\"",
-    "format": "prettier --write \"./**/*.ts\"",
+    "format": "prettier --write \"./**/*.ts\" \"./prettier.config.js\" \"./**/*.html\" \"./**/*.css\"",
     "unit-tests": "npm run build && mocha --config ./tests/.mocharc.json ./dist/tests/tests.spec.js",
     "behavior-tests": "npm run build && mocha --config ./specs/.mocharc.json ./dist/specs/tests.spec.js",
     "test": "npm run build && mocha --config ./tests/.mocharc.json ./dist/tests/tests.spec.js && mocha --config ./specs/.mocharc.json ./dist/specs/tests.spec.js",
     "start": "npm run build && electron ./dist/src/app/main.js"
   },
-  "author": "Sebastien Levy",
-  "license": "ISC",
+  "author": "MetaBarj0",
+  "license": "MIT",
   "dependencies": {
     "electron": "^5.0.2"
   },
@@ -27,13 +27,17 @@
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "@typescript-eslint/typescript-estree": "^1.9.0",
+    "angular-html-parser": "^1.2.0",
     "chai": "^4.2.0",
+    "cpx": "^1.5.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "prettier": "^1.17.1",
     "rimraf": "^2.6.3",
+    "source-map-support": "^0.5.12",
+    "ts-node": "^8.2.0",
     "typescript": "^3.4.5"
   }
 }
