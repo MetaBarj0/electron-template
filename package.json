@@ -5,11 +5,13 @@
   "main": "./app/main.js",
   "scripts": {
     "build": "npx tsc",
-    "clean" :"rimraf ./dist",
-    "lint": "eslint --ext .ts ./app",
+    "clean": "rimraf ./dist",
+    "lint": "eslint --ext .ts \"./**/*.ts\"",
     "format": "prettier --write \"./**/*.ts\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ./dist/app/main.js"
+    "unit-tests": "npm run build && mocha --config ./tests/.mocharc.json ./dist/tests/tests.spec.js",
+    "behavior-tests": "npm run build && mocha --config ./specs/.mocharc.json ./dist/specs/tests.spec.js",
+    "test": "npm run build && mocha --config ./tests/.mocharc.json ./dist/tests/tests.spec.js && mocha --config ./specs/.mocharc.json ./dist/specs/tests.spec.js",
+    "start": "npm run build && electron ./dist/src/app/main.js"
   },
   "author": "Sebastien Levy",
   "license": "ISC",
