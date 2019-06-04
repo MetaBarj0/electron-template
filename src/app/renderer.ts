@@ -1,9 +1,13 @@
-const button = document.querySelector(".alert");
+import { remote } from "electron";
+
+const button = document.querySelector(".devtools");
 
 if (button)
   button.addEventListener(
     "click",
     (): void => {
-      alert(__dirname);
+      remote
+        .require("./lib")
+        .openDevToolsInMainWindow(remote.getCurrentWindow());
     }
   );
