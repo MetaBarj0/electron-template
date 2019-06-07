@@ -3,8 +3,6 @@ import gulp, { parallel, series } from "gulp";
 import ts from "gulp-typescript";
 import rimraf from "rimraf";
 import { Stream } from "stream";
-import mocha from "gulp-mocha";
-import fs from "fs";
 
 type taskCallback = () => void;
 
@@ -47,22 +45,6 @@ async function deployStatics(cb: taskCallback): Promise<void> {
   cb();
 }
 
-function runTests(mochaOptionsFilePath: string, testFile: string): Stream {
-  const mochaOptions = JSON.parse(
-    fs.readFileSync(mochaOptionsFilePath).toString()
-  );
-
-  return gulp.src(testFile).pipe(mocha(mochaOptions));
-}
-
-function runUnitTests(): Stream {
-  return runTests("./tests/.mocharc.json", "./dist/tests/tests.spec.js");
-}
-
-function runBehavioralTests(): Stream {
-  return runTests("./specs/.mocharc.json", "./dist/specs/tests.spec.js");
-}
-
 export async function clean(cb: taskCallback): Promise<void> {
   await Promise.all([
     cleanAsPromised("./dist"),
@@ -74,5 +56,3 @@ export async function clean(cb: taskCallback): Promise<void> {
 
 export const build = parallel(deployStatics, transpile);
 export const rebuild = series(clean, build);
-export const utest = series(build, runUnitTests);
-export const btest = series(build, runBehavioralTests);
