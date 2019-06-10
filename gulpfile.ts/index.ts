@@ -3,6 +3,7 @@ import gulp, { parallel, series } from "gulp";
 import ts from "gulp-typescript";
 import rimraf from "rimraf";
 import { Stream } from "stream";
+import sourcemaps from "gulp-sourcemaps";
 
 type taskCallback = () => void;
 
@@ -35,8 +36,10 @@ function transpile(): Stream {
 
   return tsProject
     .src()
+    .pipe(sourcemaps.init())
     .pipe(tsProject())
-    .js.pipe(gulp.dest(tsProject.options.outDir || "./dist"));
+    .pipe(sourcemaps.write(".", { sourceRoot: "./", includeContent: false }))
+    .pipe(gulp.dest(tsProject.options.outDir || "./dist"));
 }
 
 async function deployStatics(cb: taskCallback): Promise<void> {
