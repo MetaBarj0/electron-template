@@ -11,7 +11,8 @@
     "format": "prettier --write \"./**/*.ts\" \"./prettier.config.js\" \"./**/*.html\" \"./**/*.css\" \"./{tests,specs}/*.json\"",
     "utest": "npm run build && nyc mocha --config ./tests/.mocharc.json ./dist/tests/tests.spec.js",
     "btest": "npm run build && nyc mocha --config ./specs/.mocharc.json ./dist/specs/tests.spec.js",
-    "start": "npm run build && electron ./dist/src/app/main.js"
+    "start": "npm run build && electron ./dist/src/app/main.js",
+    "release": "gulp release"
   },
   "author": "MetaBarj0",
   "license": "MIT",
@@ -26,6 +27,7 @@
     "@types/gulp": "^4.0.6",
     "@types/gulp-sourcemaps": "0.0.32",
     "@types/gulp-typescript": "^2.13.0",
+    "@types/mkdirp": "^0.5.2",
     "@types/mocha": "^5.2.6",
     "@types/node": "^12.0.3",
     "@types/rimraf": "^2.0.2",
@@ -42,6 +44,7 @@
     "gulp-mocha": "^6.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-typescript": "^5.0.1",
+    "mkdirp": "^0.5.1",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
     "prettier": "^1.17.1",

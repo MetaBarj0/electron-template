@@ -4,15 +4,21 @@ import ts from "gulp-typescript";
 import rimraf from "rimraf";
 import { Stream } from "stream";
 import sourcemaps from "gulp-sourcemaps";
+import mkdir from "mkdirp";
 
 type taskCallback = () => void;
 
 async function copyAsPromised(source: string, target: string): Promise<void> {
-  cpx.copy(
-    source,
-    target,
-    async (err: Error | null): ReturnType<typeof copyAsPromised> => {
-      if (err) throw err;
+  return new Promise<void>(
+    (resolve, reject): void => {
+      cpx.copy(
+        source,
+        target,
+        (err: Error | null): void => {
+          if (err) reject(err);
+          else resolve();
+        }
+      );
     }
   );
 }
@@ -25,6 +31,20 @@ async function cleanAsPromised(target: string): Promise<void> {
         (err: Error): void => {
           if (err) reject(err);
           resolve();
+        }
+      );
+    }
+  );
+}
+
+async function mkdirAsPromised(target: string): Promise<void> {
+  return new Promise<void>(
+    (resolve, reject): void => {
+      mkdir(
+        target,
+        (err: NodeJS.ErrnoException): void => {
+          if (err) reject(err);
+          else resolve();
         }
       );
     }
@@ -48,6 +68,17 @@ async function deployStatics(cb: taskCallback): Promise<void> {
   cb();
 }
 
+async function gatherReleaseFiles(cb: taskCallback): Promise<void> {
+  await mkdirAsPromised("./dist/release");
+  await copyAsPromised("./dist/src/app/**/*.{js,html,css}", "./dist/release");
+
+  cb();
+}
+
+function packageApp(cb: taskCallback): void {
+  cb();
+}
+
 export async function clean(cb: taskCallback): Promise<void> {
   await Promise.all([
     cleanAsPromised("./dist"),
@@ -59,3 +90,4 @@ export async function clean(cb: taskCallback): Promise<void> {
 
 export const build = parallel(deployStatics, transpile);
 export const rebuild = series(clean, build);
+export const release = series(build, gatherReleaseFiles, packageApp);
