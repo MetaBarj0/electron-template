@@ -1,10 +1,10 @@
 import cpx from "cpx";
 import gulp, { parallel, series } from "gulp";
+import sourcemaps from "gulp-sourcemaps";
 import ts from "gulp-typescript";
+import mkdir from "mkdirp";
 import rimraf from "rimraf";
 import { Stream } from "stream";
-import sourcemaps from "gulp-sourcemaps";
-import mkdir from "mkdirp";
 
 type taskCallback = () => void;
 
@@ -69,8 +69,13 @@ async function deployStatics(cb: taskCallback): Promise<void> {
 }
 
 async function gatherReleaseFiles(cb: taskCallback): Promise<void> {
-  await mkdirAsPromised("./dist/release");
-  await copyAsPromised("./dist/src/app/**/*.{js,html,css}", "./dist/release");
+  await mkdirAsPromised("./dist/release/app");
+
+  await Promise.all([
+    copyAsPromised("./dist/src/app/**/*.{js,html,css}", "./dist/release/app"),
+    copyAsPromised("./package*.json", "./dist/release"),
+    copyAsPromised("./LICENSE", "./dist/release")
+  ]);
 
   cb();
 }
