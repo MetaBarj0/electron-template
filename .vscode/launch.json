@@ -11,7 +11,7 @@
         "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
       },
       "sourceMaps": true,
-      "args" : ["--inspect", "./dist/src/app/main.js"],
+      "args": ["--inspect", "./dist/src/app/main.js"],
       "outputCapture": "std"
     }
   ]

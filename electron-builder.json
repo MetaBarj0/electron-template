@@ -1,0 +1,9 @@
+{
+  "appId": "electron-template",
+  "win": {
+    "target": "portable"
+  },
+  "directories": {
+    "output": "."
+  }
+}

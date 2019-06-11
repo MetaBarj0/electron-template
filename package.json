@@ -8,11 +8,11 @@
     "rebuild": "gulp rebuild",
     "clean": "gulp clean",
     "lint": "eslint --ext .ts \"./**/*.ts\"",
-    "format": "prettier --write \"./**/*.ts\" \"./prettier.config.js\" \"./**/*.html\" \"./**/*.css\" \"./{tests,specs}/*.json\"",
+    "format": "prettier --write \"./**/*.ts\" \"./prettier.config.js\" \"./**/*.html\" \"./**/*.css\" \"./**/*.json\"",
     "utest": "npm run build && nyc mocha --config ./tests/.mocharc.json ./dist/tests/tests.spec.js",
     "btest": "npm run build && nyc mocha --config ./specs/.mocharc.json ./dist/specs/tests.spec.js",
     "start": "npm run build && electron ./dist/src/app/main.js",
-    "release": "gulp release"
+    "release": "npm run lint && gulp release && electron-builder --config ../../electron-builder.json --project ./dist/release"
   },
   "author": "MetaBarj0",
   "license": "MIT",
@@ -36,7 +36,7 @@
     "chai": "^4.2.0",
     "cpx": "^1.5.0",
     "electron": "^5.0.2",
-    "electron-packager": "^13.1.1",
+    "electron-builder": "^20.43.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "gulp": "^4.0.2",
